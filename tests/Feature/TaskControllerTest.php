@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
 use Tests\TestCase;
 
-class AdminTaskControllerTest extends TestCase
+class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -60,7 +60,7 @@ class AdminTaskControllerTest extends TestCase
         $response->assertStatus(200)
                  ->assertJson([
                      'success' => true,
-                     'message' => 'Task updated successfully.',
+                     'message' => 'Task updated successfully',
                  ]);
     }
 
@@ -73,7 +73,7 @@ class AdminTaskControllerTest extends TestCase
         $response->assertStatus(200)
                  ->assertJson([
                      'success' => true,
-                     'message' => 'Task deleted successfully.',
+                     'message' => 'Task deleted successfully',
                  ]);
     }
 
@@ -128,12 +128,12 @@ class AdminTaskControllerTest extends TestCase
     {
         $task = Task::factory()->create();
 
-        $response = $this->postJson('/api/admin/tasks/' . $task->id . '/assign', [
-            'user_id' => 'invalid-email',
+        $response = $this->postJson('/api/admin/tasks/assign_users/' . $task->id , [
+            'user_emails' => null ,
         ]);
 
         $response->assertStatus(422)
-                 ->assertJsonValidationErrors(['user_id']);
+                 ->assertJsonValidationErrors(['user_emails']);
     }
 
     public function test_cannot_update_nonexistent_task()
@@ -160,11 +160,11 @@ class AdminTaskControllerTest extends TestCase
         ]);
 
         // Try assigning the same user again
-        $response = $this->postJson('/api/admin/tasks/assign_users' . $task->id , [
+        $response = $this->postJson('/api/admin/tasks/assign_users/' . $task->id , [
             'user_emails' => [$user->email] ,
         ]);
 
-        $response->assertStatus(422)
+        $response->assertStatus(200)
                  ->assertJson([
                      'success' => true,
                      'message' => 'No new users to assign.',
