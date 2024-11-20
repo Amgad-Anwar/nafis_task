@@ -51,14 +51,19 @@ Seed the database with default data, including the default admin account:
 
 php artisan db:seed  
 
-Running Tests
+Step 6: Running Tests
 
 Ensure everything works correctly by running tests:
 
 php artisan test  
 
-Task Scheduling
+Step 7: Task Scheduling
 
-Run the following command to execute scheduled tasks (if applicable):
+Run the following command to execute scheduled tasks to send reminder email:
 
 php artisan schedule:run  
+
+
+Step 8: Finally, run the project:
+
+php artisan serve

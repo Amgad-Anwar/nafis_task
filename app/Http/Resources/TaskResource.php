@@ -22,7 +22,7 @@ class TaskResource extends JsonResource
             'description' => $this->description,
             'due_date' => $this->due_date,
             'status' => $this->status,
-            'overdue'=> (Carbon::now() < $this->due_date) ? true : false ,
+            'overdue'=> (Carbon::now()->format('Y-m-d H:i:s') > $this->due_date) ? true : false ,
 
         ];
     }
