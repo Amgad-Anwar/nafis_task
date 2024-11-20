@@ -18,12 +18,10 @@ class TaskControllerTest extends TestCase
     {
         parent::setUp();
 
-        // Create a user with admin privileges
         $this->admin = User::factory()->create([
-            'role' => 'admin', // Assuming you have a 'role' field for admin
+            'role' => 'admin',
         ]);
 
-        // Acting as the admin user for all requests
         $this->actingAs($this->admin);
     }
 

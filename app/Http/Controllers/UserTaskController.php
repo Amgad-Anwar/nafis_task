@@ -23,7 +23,6 @@ class UserTaskController extends Controller
         $tasks = auth()->user()->tasks()->when($request->status, function($q) use ($request) {
             $q->where('status', $request->status);
         })->paginate();
-
         //==== we can use it like : =======
         // $tasks = DB::table('tasks')
         //     ->join('task_user', 'tasks.id', '=', 'task_user.task_id') // Join the pivot table

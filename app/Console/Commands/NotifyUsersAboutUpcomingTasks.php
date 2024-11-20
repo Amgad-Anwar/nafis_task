@@ -27,9 +27,9 @@ class NotifyUsersAboutUpcomingTasks extends Command
     {
         $now = Carbon::now();
         $tasks = Task::where('status','!=' , 'completed')
-                    ->where('due_date', '>', $now)
-                     ->where('due_date', '<=', $now->addDay())
-                     ->get();
+                ->where('due_date', '>', $now->format('Y-m-d H:i:s'))
+                 ->where('due_date', '<=', $now->addDay()->format('Y-m-d H:i:s'))
+                 ->get();
 
         foreach ($tasks as $task) {
             foreach ($task->users as $user) {
