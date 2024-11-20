@@ -21,18 +21,8 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('test', function () {
-    // $user = User::find(1);  // Find a user (replace with a valid user ID)
-    //  $task = Task::find(1);  // Find a task (replace with a valid task ID)
-    // // $user->notify(new TaskDueNotification($task)  );
-
-    $now = Carbon::now();
-    $tasks = Task::where('status','!=' , 'completed')
-                ->where('due_date', '>', $now->format('Y-m-d H:i:s'))
-                 ->where('due_date', '<=', $now->addDay()->format('Y-m-d H:i:s'))
-                 ->get();
-
-                 dd( $tasks  , $now->format('Y-m-d H:i:s') , $now->addDay()->format('Y-m-d H:i:s')) ;
-
+    // $user = User::find(1);
+    //  $task = Task::find(1);  
     // Mail::to('amgad.anwar.dev@gmail.com')
     // ->send(new TaskDueNotificationMail($task));
     return 'Test notification sent!';
